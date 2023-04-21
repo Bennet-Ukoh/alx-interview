@@ -4,6 +4,7 @@
 
 """
 
+
 def pascal_triangle(n):
     """
     Generate the first n rows of Pascal's triangle.
@@ -26,9 +27,11 @@ def pascal_triangle(n):
         # Create a list to store the current row of Pascal's triangle.
         row = [1]
 
-        # Loop through each element in the current row, except for the first and last elements.
+        # Loop through each element in the current row,
+        # except for the first and last elements.
         for j in range(1, i):
-            # Calculate the value of the current element by adding the two elements above it in the previous row.
+            # Calculate the value of the current element
+            # by adding the two elements above it in the previous row.
             value = triangle[i - 1][j - 1] + triangle[i - 1][j]
             row.append(value)
 
@@ -40,4 +43,3 @@ def pascal_triangle(n):
 
     # Return the triangle.
     return triangle
-
