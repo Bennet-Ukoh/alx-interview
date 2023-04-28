@@ -25,3 +25,7 @@ boxes is a list of lists
 - There can be keys that do not have boxes
 - The first box boxes[0] is unlocked
 - Return True if all boxes can be opened, else return False
+
+## Author
+
+Bennet Ukoh
