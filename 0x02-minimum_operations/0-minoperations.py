@@ -21,7 +21,7 @@ and Paste operations
 
     while n > 1:
         if n % factor == 0:
-            operations += (n // factor)
+            operations += factor
             n //= factor
         else:
             factor += 1
