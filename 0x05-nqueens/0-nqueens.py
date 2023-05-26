@@ -1,59 +1,71 @@
-#!/usr/bin/python3
+i#!/usr/bin/python3
 """0. N queens"""
-
 import sys
 
 
 def is_safe(board, row, col):
     """
-    Check if it's safe to place a queen at the given position on the board.
-
+    Check if a queen can be placed at the specified position
     Args:
-        board (list): The current state of the chessboard.
-        row (int): The row index to check.
-        col (int): The column index to check.
-
+        board: List representing the current state of the board.
+        row: Row index of the position to check.
+        col: Column index of the position to check.
     Returns:
-        bool: True if it's safe to place a queen, False otherwise.
+        True if a queen can be placed at the specified position.
     """
+    for i in range(row):
+        if (
+            board[i] == col
+            or board[i] - i == col - row
+            or board[i] + i == col + row
+):
+    return False
+    return True
 
 
-def solve_nqueens(board, row, solutions):
+def solve_nqueens(board, row, n):
     """
-    Solve the N Queens problem using backtracking.
-
+    Solve the N Queens problem recursively using backtracking.
     Args:
-        board (list): The current state of the chessboard.
-        row (int): The current row to consider.
-        solutions (list): A list to store the solutions.
-
-    Returns:
-        None
+        board: List representing the current state of the board.
+        row: Current row being considered for queen placement.
+        n: Size of the board.
     """
-
-
-def print_solutions(solutions):
-    """
-    Print the solutions to the N Queens problem.
-
-    Args:
-        solutions (list): A list containing the solutions.
-
-    Returns:
-        None
-    """
+    if row == n:
+        # All queens have been placed, print the solution
+        print(board)
+        return
+        for col in range(n):
+            if is_safe(board, row, col):
+                board[row] = col
+                solve_nqueens(board, row + 1, n)
 
 
 def nqueens(n):
     """
-    Solve the N Queens problem for a given value of N.
-
+    Solve the N Queens problem and print all possible solutions.
     Args:
-        n (int): The size of the chessboard and the number of queens.
-    Returns:
-        None
+        n: Size of the chessboard and number of queens.
     """
+    # Check if the input is a valid integer
+    try:
+        n = int(n)
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
+
+    # Check if N is at least 4
+    if n < 4:
+        print("N must be at least 4")
+        sys.exit(1)
+
+    board = [-1] * n
+    solve_nqueens(board, 0, n)
+
 if __name__ == "__main__":
+    # Check if the correct number of arguments is provided
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
+
+    nqueens(sys.argv[1])
