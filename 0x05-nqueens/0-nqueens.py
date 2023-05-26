@@ -1,4 +1,4 @@
-i#!/usr/bin/python3
+#!/usr/bin/python3
 """0. N queens"""
 import sys
 
@@ -11,15 +11,15 @@ def is_safe(board, row, col):
         row: Row index of the position to check.
         col: Column index of the position to check.
     Returns:
-        True if a queen can be placed at the specified position.
+        True if a queen can be placed at the specified position
     """
     for i in range(row):
         if (
-            board[i] == col
-            or board[i] - i == col - row
-            or board[i] + i == col + row
+            board[i] == co or
+                board[i] - i == col - row or
+                board[i] + i == col + row
         ):
-    return False
+            return False
     return True
 
 
@@ -35,10 +35,11 @@ def solve_nqueens(board, row, n):
         # All queens have been placed, print the solution
         print(board)
         return
-        for col in range(n):
-            if is_safe(board, row, col):
-                board[row] = col
-                solve_nqueens(board, row + 1, n)
+
+    for col in range(n):
+        if is_safe(board, row, col):
+            board[row] = col
+            solve_nqueens(board, row + 1, n)
 
 
 def nqueens(n):
@@ -61,6 +62,7 @@ def nqueens(n):
 
     board = [-1] * n
     solve_nqueens(board, 0, n)
+
 
 if __name__ == "__main__":
     # Check if the correct number of arguments is provided
