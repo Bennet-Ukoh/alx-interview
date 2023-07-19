@@ -3,17 +3,19 @@
 Game of primes: Determine the winner for each round
 '''
 
+
 def isWinner(x, nums):
     '''
     Determine the winner of each round
 
     Args:
         x (int): Number of rounds to play
-        nums (list): List of integers representing the range of numbers for each round
+        nums (list): List of integers representing the range of numbers for each rnd
 
     Returns:
-        str or None: The name of the player with the most wins or None if the winner cannot be determined
+        str or None: The name of the player with the most wins or None
     '''
+
 
     def rec(n):
         '''
