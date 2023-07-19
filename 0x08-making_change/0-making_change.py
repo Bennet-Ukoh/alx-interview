@@ -4,6 +4,7 @@ Given a pile of coins of different values, determine the fewest number of
 coins needed to meet a given total total.
 '''
 
+
 def makeChange(coins, total):
     """
     For a given few coins
@@ -20,17 +21,12 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    # Initialize a list to store the minimum number of coins needed for each amount
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0
+    coins.sort(reverse=True)  # Sort the coin denominations in descending order
+    num_coins = 0
 
-    # Iterate through each coin value and update the dp list
     for coin in coins:
-        for amount in range(coin, total + 1):
-            dp[amount] = min(dp[amount], dp[amount - coin] + 1)
+        while total >= coin:
+            total -= coin
+            num_coins += 1
 
-    # If the value at the total amount is still infinity, it means the amount cannot be met
-    if dp[total] == float('inf'):
-        return -1
-
-    return dp[total]
+    return num_coins if total == 0 else -1
