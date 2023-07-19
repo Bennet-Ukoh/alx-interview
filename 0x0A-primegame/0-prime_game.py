@@ -1,54 +1,63 @@
 #!/usr/bin/python3
-
+'''
+Game of primes: Determine the winner for each round
+'''
 
 def isWinner(x, nums):
+    '''
+    Determine the winner of each round
 
+    Args:
+        x (int): Number of rounds to play
+        nums (list): List of integers representing the range of numbers for each round
 
-    def isPrime(num):
-        if num < 2:
-            return False
-        for i in range(2, int(num**0.5) + 1):
-            if num % i == 0:
-                return False
-        return True
+    Returns:
+        str or None: The name of the player with the most wins or None if the winner cannot be determined
+    '''
 
+    def rec(n):
+        '''
+        Play a single round of the game
 
-    def calculatePrimes(n):
-        primes = []
-        for i in range(2, n + 1):
-            if isPrime(i):
-                primes.append(i)
-        return primes
+        Args:
+            n (int): The range of numbers for this round
 
+        Returns:
+            int: 1 if Maria wins, 2 if Ben wins
+        '''
+        if n == 1:
+            return 2
+        if n == 2:
+            return 1
 
-    def canWin(n, primes):
-        dp = [False] * (n + 1)
-        for i in range(1, n + 1):
-            for prime in primes:
-                if i - prime < 0:
-                    break
-                if not dp[i - prime]:
-                    dp[i] = True
+        count = 0
+        for num in range(3, n + 1):
+            for i in range(2, num):
+                if (num % i) == 0:
                     break
             else:
-                continue
-            break
-        return dp[-1]
+                count += 1
 
-    winners = []
-    for n in nums:
-        primes = calculatePrimes(n)
-        if canWin(n, primes):
-            winners.append("Maria")
-        else:
-            winners.append("Ben")
+        if count % 2:
+            return 2
+        return 1
 
-    maria_wins = winners.count("Maria")
-    ben_wins = winners.count("Ben")
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    if x == 0 or len(nums) != x:
         return None
+
+    maria = 0
+    ben = 0
+
+    for rnd in nums:
+        result = rec(rnd)
+        if result == 1:
+            maria += 1
+        else:
+            ben += 1
+
+    if maria == ben:
+        return None
+    elif maria > ben:
+        return "Maria"
+    else:
+        return "Ben"
